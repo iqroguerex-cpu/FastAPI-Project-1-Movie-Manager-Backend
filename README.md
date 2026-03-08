@@ -1,53 +1,62 @@
 # 🎬 Movie Manager API (FastAPI)
 
-This is the **backend API** for the Movie Manager application built using **FastAPI**.
+[![Live API](https://img.shields.io/badge/API-Live-success?style=for-the-badge)](https://fastapi-project-1-movie-manager.onrender.com)
+[![API Docs](https://img.shields.io/badge/Docs-Swagger-blue?style=for-the-badge)](https://fastapi-project-1-movie-manager.onrender.com/docs)
+![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge\&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-Framework-009688?style=for-the-badge\&logo=fastapi)
+![Render](https://img.shields.io/badge/Hosted%20on-Render-purple?style=for-the-badge)
 
-The API allows users to manage a collection of movies by performing **CRUD operations**.
+A **REST API built with FastAPI** for managing a collection of movies.
+The API supports full **CRUD operations** and filtering capabilities.
 
-Live API:
+---
+
+# 🌐 Live API
+
+**Base URL**
+
 https://fastapi-project-1-movie-manager.onrender.com
 
-API Docs:
+**Interactive API Docs**
+
 https://fastapi-project-1-movie-manager.onrender.com/docs
 
 ---
 
 # 🚀 Features
 
-* Get all movies
-* Get movie by title
-* Filter movies by genre
-* Filter movies by director and genre
-* Add new movie
-* Update movie
-* Delete movie
+* 🎬 Get all movies
+* 🔎 Get movie by title
+* 🎭 Filter movies by genre
+* 👨‍🎬 Filter by director and genre
+* ➕ Add new movie
+* ✏️ Update movie
+* ❌ Delete movie
+* 📚 Interactive API documentation (Swagger)
 
 ---
 
 # 🛠 Tech Stack
 
-Backend Framework
+### Backend
 
-* FastAPI
+* **FastAPI**
+* **Python**
 
-Server
+### Server
 
-* Uvicorn
+* **Uvicorn**
 
-Deployment
+### Deployment
 
-* Render
-
-Language
-
-* Python
+* **Render**
 
 ---
 
 # 📂 Project Structure
 
-```
-movie-manager-api
+```id="9l4r2k"
+fastapi-project-1-movie-manager
 │
 ├── movie_api.py
 ├── requirements.txt
@@ -60,31 +69,31 @@ movie-manager-api
 
 Clone the repository
 
-```
-git clone https://github.com/YOUR_USERNAME/fastapi-project-1-movie-manager.git
+```id="ho3o9o"
+git clone https://github.com/iqroguerex-cpu/fastapi-project-1-movie-manager.git
 ```
 
-Go into the folder
+Navigate into the project folder
 
-```
+```id="6soky9"
 cd fastapi-project-1-movie-manager
 ```
 
 Install dependencies
 
-```
+```id="9u4wru"
 pip install -r requirements.txt
 ```
 
-Run the server
+Run the FastAPI server
 
-```
+```id="a2qknf"
 uvicorn movie_api:app --reload --port 8002
 ```
 
-Open API docs
+Open the interactive API documentation
 
-```
+```id="6r6x1q"
 http://127.0.0.1:8002/docs
 ```
 
@@ -92,21 +101,21 @@ http://127.0.0.1:8002/docs
 
 # 📡 API Endpoints
 
-| Method | Endpoint                           | Description                |
-| ------ | ---------------------------------- | -------------------------- |
-| GET    | /movies                            | Get all movies             |
-| GET    | /movies/{movie_title}              | Get movie by title         |
-| GET    | /movies/?genre=action              | Filter by genre            |
-| GET    | /movies/{director}/?genre=sci-fi   | Filter by director & genre |
-| POST   | /movies/create_movie               | Add movie                  |
-| PUT    | /movies/update_movie               | Update movie               |
-| DELETE | /movies/delete_movie/{movie_title} | Delete movie               |
+| Method | Endpoint                             | Description                |
+| ------ | ------------------------------------ | -------------------------- |
+| GET    | `/movies`                            | Get all movies             |
+| GET    | `/movies/{movie_title}`              | Get movie by title         |
+| GET    | `/movies/?genre=action`              | Filter movies by genre     |
+| GET    | `/movies/{director}/?genre=sci-fi`   | Filter by director & genre |
+| POST   | `/movies/create_movie`               | Add a new movie            |
+| PUT    | `/movies/update_movie`               | Update a movie             |
+| DELETE | `/movies/delete_movie/{movie_title}` | Delete a movie             |
 
 ---
 
 # 🎯 Example Movie Object
 
-```
+```id="nnv4ta"
 {
   "title": "Inception",
   "director": "Christopher Nolan",
@@ -117,18 +126,32 @@ http://127.0.0.1:8002/docs
 
 ---
 
-# 🌐 Frontend
+# 🌐 Frontend Application
 
-The frontend UI for this project is hosted separately:
+The **frontend dashboard** for this API is hosted separately.
 
-Frontend Repo:
+Frontend Repository
 https://github.com/iqroguerex-cpu/FastAPI-Project-1-Movie-Manager-Frontend
 
-Live UI:
+Live Frontend UI
 https://iqroguerex-cpu.github.io/FastAPI-Project-1-Movie-Manager-Frontend/
+
+---
+
+# 📚 API Documentation
+
+FastAPI automatically generates interactive API documentation.
+
+Swagger UI
+
+https://fastapi-project-1-movie-manager.onrender.com/docs
 
 ---
 
 # 📄 License
 
-This project is open-source and available for learning and educational purposes.
+This project is **open-source** and available for **learning and educational purposes**.
+
+---
+
+⭐ If you like this project, consider **starring the repository**.
