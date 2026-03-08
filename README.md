@@ -122,7 +122,7 @@ http://127.0.0.1:8002/docs
 The frontend UI for this project is hosted separately:
 
 Frontend Repo:
-https://github.com/YOUR_USERNAME/movie-manager-frontend
+https://github.com/iqroguerex-cpu/movie-manager-frontend
 
 Live UI:
 https://iqroguerex-cpu.github.io/FastAPI-Project-1-Movie-Manager-Frontend/
