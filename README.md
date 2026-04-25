@@ -1,157 +1,145 @@
-# 🎬 Movie Manager API (FastAPI)
+# 🎬 Movie Manager API (AWS Serverless)
 
-[![Live API](https://img.shields.io/badge/API-Live-success?style=for-the-badge)](https://fastapi-project-1-movie-manager.onrender.com)
-[![API Docs](https://img.shields.io/badge/Docs-Swagger-blue?style=for-the-badge)](https://fastapi-project-1-movie-manager.onrender.com/docs)
-![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge\&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-Framework-009688?style=for-the-badge\&logo=fastapi)
-![Render](https://img.shields.io/badge/Hosted%20on-Render-purple?style=for-the-badge)
+<p align="center">
 
-A **REST API built with FastAPI** for managing a collection of movies.
-The API supports full **CRUD operations** and filtering capabilities.
+[![Live API](https://img.shields.io/badge/API-Live-success?style=for-the-badge)](https://act0h7myif.execute-api.ap-south-1.amazonaws.com/default/)
+![AWS](https://img.shields.io/badge/AWS-Serverless-orange?style=for-the-badge\&logo=amazonaws)
+![Lambda](https://img.shields.io/badge/AWS-Lambda-yellow?style=for-the-badge\&logo=awslambda)
+![DynamoDB](https://img.shields.io/badge/Database-DynamoDB-blue?style=for-the-badge\&logo=amazondynamodb)
+![API Gateway](https://img.shields.io/badge/API-Gateway-green?style=for-the-badge)
+
+</p>
 
 ---
 
-# 🌐 Live API
+## 🚀 Overview
+
+A fully **serverless REST API** built using **AWS Lambda, API Gateway, and DynamoDB** for managing a collection of movies.
+
+This API supports core **CRUD operations** and is designed for scalability, low cost, and real-time performance without managing servers.
+
+---
+
+## 🌐 Live API
 
 **Base URL**
 
-https://fastapi-project-1-movie-manager.onrender.com
-
-**Interactive API Docs**
-
-https://fastapi-project-1-movie-manager.onrender.com/docs
+https://act0h7myif.execute-api.ap-south-1.amazonaws.com/default/
 
 ---
 
-# 🚀 Features
+## ✨ Features
 
 * 🎬 Get all movies
 * 🔎 Get movie by title
-* 🎭 Filter movies by genre
-* 👨‍🎬 Filter by director and genre
 * ➕ Add new movie
-* ✏️ Update movie
 * ❌ Delete movie
-* 📚 Interactive API documentation (Swagger)
+* ⚡ Fast serverless execution
+* ☁️ Scalable AWS infrastructure
+* 🗄️ Persistent storage using DynamoDB
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
 ### Backend
 
-* **FastAPI**
-* **Python**
+* AWS Lambda
+* API Gateway
+* DynamoDB
 
-### Server
+### Language
 
-* **Uvicorn**
+* Python
 
 ### Deployment
 
-* **Render**
+* AWS Serverless Architecture
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
-```id="9l4r2k"
-fastapi-project-1-movie-manager
+```bash id="awsstruct1"
+movie-manager-serverless
 │
-├── movie_api.py
+├── lambda_function.py
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-# ⚙️ Installation (Local Setup)
+## ⚙️ How It Works
 
-Clone the repository
-
-```id="ho3o9o"
-git clone https://github.com/iqroguerex-cpu/fastapi-project-1-movie-manager.git
-```
-
-Navigate into the project folder
-
-```id="6soky9"
-cd fastapi-project-1-movie-manager
-```
-
-Install dependencies
-
-```id="9u4wru"
-pip install -r requirements.txt
-```
-
-Run the FastAPI server
-
-```id="a2qknf"
-uvicorn movie_api:app --reload --port 8002
-```
-
-Open the interactive API documentation
-
-```id="6r6x1q"
-http://127.0.0.1:8002/docs
-```
+1. **API Gateway** receives HTTP requests
+2. Triggers **AWS Lambda function**
+3. Lambda processes logic
+4. Data is stored/retrieved from **DynamoDB**
+5. Response is returned to client
 
 ---
 
-# 📡 API Endpoints
+## 📡 API Endpoints
 
-| Method | Endpoint                             | Description                |
-| ------ | ------------------------------------ | -------------------------- |
-| GET    | `/movies`                            | Get all movies             |
-| GET    | `/movies/{movie_title}`              | Get movie by title         |
-| GET    | `/movies/?genre=action`              | Filter movies by genre     |
-| GET    | `/movies/{director}/?genre=sci-fi`   | Filter by director & genre |
-| POST   | `/movies/create_movie`               | Add a new movie            |
-| PUT    | `/movies/update_movie`               | Update a movie             |
-| DELETE | `/movies/delete_movie/{movie_title}` | Delete a movie             |
+| Method | Endpoint          | Description     |
+| ------ | ----------------- | --------------- |
+| GET    | `/movies`         | Get all movies  |
+| POST   | `/movies`         | Add a new movie |
+| DELETE | `/movies/{title}` | Delete a movie  |
 
 ---
 
-# 🎯 Example Movie Object
+## 🎯 Example Request
 
-```id="nnv4ta"
+### Add Movie
+
+```json id="awsreq1"
 {
   "title": "Inception",
-  "director": "Christopher Nolan",
-  "genre": "sci-fi",
-  "rating": 9
+  "genre": "Sci-Fi"
 }
 ```
 
 ---
 
-# 🌐 Frontend Application
+## 🌐 Frontend Application
 
-The **frontend dashboard** for this API is hosted separately.
+Frontend Dashboard:
 
-Frontend Repository
-https://github.com/iqroguerex-cpu/FastAPI-Project-1-Movie-Manager-Frontend
+👉 https://staging.d3mluupf1gyxaw.amplifyapp.com/
 
-Live Frontend UI
-https://iqroguerex-cpu.github.io/FastAPI-Project-1-Movie-Manager-Frontend/
+Frontend Repository:
 
----
-
-# 📚 API Documentation
-
-FastAPI automatically generates interactive API documentation.
-
-Swagger UI
-
-https://fastapi-project-1-movie-manager.onrender.com/docs
+👉 https://github.com/your-username/your-frontend-repo
 
 ---
 
-# 📄 License
+## ☁️ Architecture
 
-This project is **open-source** and available for **learning and educational purposes**.
+* **Frontend** → AWS Amplify
+* **Backend** → AWS Lambda
+* **Routing** → API Gateway
+* **Database** → DynamoDB
 
 ---
 
-⭐ If you like this project, consider **starring the repository**.
+## 🔮 Future Improvements
+
+* ✏️ Update movie endpoint
+* 🔎 Search & filter movies
+* 🔐 Authentication (JWT / AWS Cognito)
+* ⭐ Rating system
+* 📊 Analytics
+
+---
+
+## 📄 License
+
+This project is open-source and available for educational purposes.
+
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
