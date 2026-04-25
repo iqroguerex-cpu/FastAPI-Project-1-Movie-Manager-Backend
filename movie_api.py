@@ -1,5 +1,7 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, Query
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
+import boto3
 
 app = FastAPI()
 
@@ -11,73 +13,60 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MOVIES = [
-    {"title": "Inception", "director": "Christopher Nolan", "genre": "sci-fi", "rating": 9},
-    {"title": "Interstellar", "director": "Christopher Nolan", "genre": "sci-fi", "rating": 9},
-    {"title": "The Dark Knight", "director": "Christopher Nolan", "genre": "action", "rating": 9},
-    {"title": "Avengers", "director": "Joss Whedon", "genre": "action", "rating": 8},
-    {"title": "Titanic", "director": "James Cameron", "genre": "romance", "rating": 8}
-]
+# DynamoDB setup
+dynamodb = boto3.resource("dynamodb")
+table = dynamodb.Table("movies")
 
 
 @app.get("/")
 async def root():
-    return {"message": "Movie Manager API Running"}
+    return {"message": "Movie Manager API Running with DynamoDB 🚀"}
 
 
+# Get all movies
 @app.get("/movies")
-async def display_movies():
-    return MOVIES
+async def get_movies():
+    response = table.scan()
+    return response.get("Items", [])
 
 
-@app.get("/movies/{movie_title}")
-async def read_movie_by_movie_title(movie_title: str):
-    for movie in MOVIES:
-        if movie.get("title").casefold() == movie_title.casefold():
-            return movie
-    return {"message": "Movie does not exist"}
+# Get movie by title
+@app.get("/movies/title/{movie_title}")
+async def get_movie(movie_title: str):
+    response = table.get_item(Key={"title": movie_title})
+    return response.get("Item", {"message": "Movie not found"})
 
 
-@app.get("/movies/")
-async def movie_by_genre(genre: str):
-    movies_by_genre = []
-    for movie in MOVIES:
-        if movie.get("genre").casefold() == genre.casefold():
-            movies_by_genre.append(movie)
-    return movies_by_genre
+# Filter by genre
+@app.get("/movies/genre")
+async def get_by_genre(genre: str = Query(...)):
+    response = table.scan()
+    return [
+        item for item in response.get("Items", [])
+        if item.get("genre", "").lower() == genre.lower()
+    ]
 
 
-@app.get("/movies/{director}/")
-async def movies_by_director_genre(director: str, genre: str):
-    result = []
-    for movie in MOVIES:
-        if (
-            movie.get("director").casefold() == director.casefold()
-            and movie.get("genre").casefold() == genre.casefold()
-        ):
-            result.append(movie)
-    return result
+# Create movie
+@app.post("/movies")
+async def create_movie(movie=Body()):
+    table.put_item(Item=movie)
+    return {"message": "Movie added"}
 
 
-@app.post("/movies/create_movie")
-async def add_movies(create_movie=Body()):
-    MOVIES.append(create_movie)
-    return {"message": "Movie added successfully"}
+# Update movie
+@app.put("/movies/{movie_title}")
+async def update_movie(movie_title: str, updated_movie=Body()):
+    table.put_item(Item=updated_movie)
+    return {"message": "Movie updated"}
 
 
-@app.put("/movies/update_movie")
-async def update_movies(update_movie=Body()):
-    for i in range(len(MOVIES)):
-        if MOVIES[i].get("title").casefold() == update_movie.get("title").casefold():
-            MOVIES[i] = update_movie
-            return {"message": "Movie updated successfully"}
-    return {"message": "Movie not found"}
-
-
-@app.delete("/movies/delete_movie/{movie_title}")
+# Delete movie
+@app.delete("/movies/{movie_title}")
 async def delete_movie(movie_title: str):
-    for i in range(len(MOVIES)):
-        if MOVIES[i].get("title").casefold() == movie_title.casefold():
-            MOVIES.pop(i)
-            return {"message": "Movie deleted successfully"}
-    return {"message": "Movie not found"}
+    table.delete_item(Key={"title": movie_title})
+    return {"message": "Movie deleted"}
+
+
+# Lambda handler
+handler = Mangum(app)
